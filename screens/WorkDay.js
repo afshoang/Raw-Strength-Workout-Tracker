@@ -45,21 +45,21 @@ const WorkDay = () => {
     })
   }, [timeWorkOut, typeExcercises])
 
-  // useEffect(() => {
-  //   if (workDay) {
-  //     if (!workDay.timeWorkOut) {
-  //       let timeWorkOutInterval = null;
+  useEffect(() => {
+    if (workDay) {
+      if (!workDay.timeWorkOut) {
+        let timeWorkOutInterval = null;
   
-  //       timeWorkOutInterval = setInterval(() => {
-  //         setTimeWorkOut((timeWorkOut) => timeWorkOut + 1000);
-  //       }, 1000);
+        timeWorkOutInterval = setInterval(() => {
+          setTimeWorkOut((timeWorkOut) => timeWorkOut + 1000);
+        }, 1000);
   
-  //       return () => clearInterval(timeWorkOutInterval);
-  //     } else {
-  //       setTimeWorkOut(workDay.timeWorkOut);
-  //     }
-  //   } 
-  // }, [workDay]);
+        return () => clearInterval(timeWorkOutInterval);
+      } else {
+        setTimeWorkOut(workDay.timeWorkOut);
+      }
+    } 
+  }, [workDay]);
 
   useEffect(() => {
     const id = setInterval(() => {
