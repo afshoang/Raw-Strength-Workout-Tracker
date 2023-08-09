@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "531workout",
-    "slug": "531workout",
+    "name": "Raw Strength",
+    "slug": "raw-strength",
+    "description": "This is best app for tracking your progress on Jim Wendler's famous 5/3/1 strength program. From planning your workouts, to tracking your progress.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/loading.png",
+      "resizeMode": "contain"
     },
     "assetBundlePatterns": [
       "**/*"

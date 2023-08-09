@@ -84,7 +84,7 @@ const Home = () => {
             fontSize: SIZES.extraLarge,
             color: COLORS.white,
             marginBottom: SIZES.font
-          }}>5/3/ONE</Text>
+          }}>RAW STRENGTH</Text>
         </View>
       </View>
 

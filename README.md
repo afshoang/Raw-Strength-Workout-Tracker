@@ -1,3 +1,8 @@
+<!-- Logo -->
+<p align="center">
+  <img width="300" src="./assets/icon.png">
+</p>
+
 # Raw Strength Workout Tracker App
 
 FOCUS ON GETTING STRONGER, THIS APP TAKE CARE OF THE REST.
@@ -6,8 +11,11 @@ This is best app for tracking your progress on Jim Wendler's famous 5/3/1 streng
 
 Created and tested on iOS.
 
-Demo: link youtube go here
-Live demo: link expo go here
+<img src="https://qr.expo.dev/expo-go?owner=hoangpham56&slug=raw-strength&releaseChannel=default&host=exp.host" alt="app-qr" width="25%">
+
+_Live demo <https://expo.dev/@hoangpham56/raw-strength/>_
+
+Demo: TODO
 
 ## Technologies used
 
