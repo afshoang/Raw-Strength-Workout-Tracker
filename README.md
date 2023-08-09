@@ -15,7 +15,7 @@ Created and tested on iOS.
 
 _Live demo <https://expo.dev/@hoangpham56/raw-strength/>_
 
-Demo: TODO
+_Video demo <https://youtube.com/shorts/ljRJnadufIg?feature=share/>_
 
 ## Technologies used
 
@@ -49,6 +49,7 @@ Demo: TODO
 ## 📷 Screenshots
 
 <p>
+  <img src="./assets/demo/demo_gif1.gif" alt="gif_demo" width="25%">
   <img src="./assets/demo/home.jpg" alt="screenshots-home-screen" width="25%">
   <img src="./assets/demo/edit_cycle.jpg" alt="screenshots-edit_cycle-screen" width="25%">
   <img src="./assets/demo/setting.jpg" alt="screenshots-setting-screen" width="25%">
