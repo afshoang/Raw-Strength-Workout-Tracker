@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { SafeAreaView, Text, View, Pressable, ScrollView, Dimensions } from 'react-native'
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import {
@@ -12,16 +12,16 @@ import { selectAllCycle, selectCycle } from '../slices/cycleSlice'
 import { selectAllWorkOut, selectWorkOutByCycleId } from '../slices/workOutSlice';
 import { COLORS, SIZES, FONTS } from "../constants";
 import { Weeks, UpcomingCycle } from '../components';
+import tw from '../lib/tailwind';
 
 const Home = () => {
   const navigation = useNavigation()
   const tabBarheight = useBottomTabBarHeight();
-  const dispatch = useDispatch()
   
   const dataCycle = useSelector(selectCycle)
   const allCycles = useSelector(selectAllCycle)
 
-  const workOuts = useSelector(selectAllWorkOut)
+  // const workOuts = useSelector(selectAllWorkOut)
   const currentCycleWorkOut = useSelector(selectWorkOutByCycleId)
 
   const [selectedTabIndex, setSelectedTabIndex] = useState(0)
@@ -33,7 +33,7 @@ const Home = () => {
     return months[index]
   })
   
-  const hehexD = allCycles?.map(cy => cy.tm)?.reduce((acc, curr) => {
+  const trainningMaxData = allCycles?.map(cy => cy.tm)?.reduce((acc, curr) => {
     curr.forEach((item, idx) => {
       if (!acc[idx]) {
         acc[idx] = []
@@ -43,7 +43,7 @@ const Home = () => {
     return acc
   }, {})
 
-  const datasets = Object.values(hehexD).map(tm => {
+  const datasets = Object.values(trainningMaxData).map(tm => {
     function random_rgba() {
       var o = Math.round, r = Math.random, s = 255;
       return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
@@ -71,20 +71,15 @@ const Home = () => {
   return (
     <SafeAreaView>
       {/* HEADER */}
-      <View style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        paddingHorizontal: SIZES.font,
-        marginTop: SIZES.extraLarge
-      }}>
+      <View 
+        style={tw`flex flex-row justify-between px-4 mt-6`}
+      >
         <View>
-          <Text style={{
-            fontFamily: FONTS.bold,
-            fontSize: SIZES.extraLarge,
-            color: COLORS.white,
-            marginBottom: SIZES.font
-          }}>RAW STRENGTH</Text>
+          <Text 
+            style={tw`font-bold text-2xl text-white mb-4`}
+          >
+            RAW STRENGTH
+          </Text>
         </View>
       </View>
 
@@ -94,18 +89,15 @@ const Home = () => {
         contentContainerStyle={[
           { paddingBottom: tabBarheight },
         ]}
-        style={{
-          height: '100%'
-        }}
+        style={tw`h-full`}
       >
       {
         (dataCycle && dataCycle !== null && currentCycleWorkOut?.length)
         ? 
           <>
-            <View style={{
-              paddingHorizontal: SIZES.font,
-              marginBottom: SIZES.large
-            }}>
+            <View 
+              style={tw`px-4 mb-5`}
+            >
               <SegmentedControlTab
                 tabsContainerStyle={{
                   backgroundColor: COLORS.primary,
@@ -134,7 +126,7 @@ const Home = () => {
                 onTabPress={(index) => setSelectedTabIndex(index)}
               />
             </View>
-              <Weeks workOuts={currentCycleWorkOut.filter(work => work.week === selectedTabIndex)} trainningMax={dataCycle?.tm} />
+            <Weeks workOuts={currentCycleWorkOut.filter(work => work.week === selectedTabIndex)} trainningMax={dataCycle?.tm} />
 
             {/* UPCOMMING CYCLE */}
             {!currentCycleWorkOut?.map(work => work.timeWorkOut).includes(null) && (
@@ -142,10 +134,9 @@ const Home = () => {
             )}
           
             {/* CHART */}
-            <View style={{
-              paddingHorizontal: SIZES.font,
-              marginTop: SIZES.font
-            }}>
+            <View 
+              style={tw`px-4 mt-4`}
+            >
               <Text style={{
                 color: COLORS.white,
                 fontSize: SIZES.medium,
@@ -224,37 +215,21 @@ const Home = () => {
           </>
         :
           <View
-            style={{
-            paddingHorizontal: SIZES.font,
-          }}
+            style={tw`px-4`}
           >
-            <View style={{
-              width: "100%",
-              backgroundColor: COLORS.primary,
-              borderRadius: SIZES.font,
-              padding: SIZES.extraLarge,
-            }}>
-              <Text style={{
-                fontSize: SIZES.font,
-                color: COLORS.white
-              }}>Your workouts will show up here after you create your first cycle</Text>
+            <View
+              style={tw`w-full bg-primary p-6 rounded-2xl`}
+            >
+              <Text 
+                style={tw`text-white text-sm`}
+              >Your workouts will show up here after you create your first cycle</Text>
               <Pressable
                 onPress={() => navigation.navigate("Cycle", { id: "add" })}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  paddingVertical: 12,
-                  borderRadius: 4,
-                  elevation: 3,
-                  backgroundColor: COLORS.main,
-                  marginTop: 16
-                }}
+                style={tw`flex flex-row items-center justify-center py-3 bg-main mt-4 rounded-md`}
               >
-                <Text style={{
-                  color: COLORS.black,
-                  fontSize: SIZES.large,
-                  fontFamily: FONTS.bold
-                }}>Create first cycle</Text>
+                <Text 
+                  style={tw`font-bold text-base text-black`}
+                >Create first cycle</Text>
               </Pressable>
             </View>
           </View>
