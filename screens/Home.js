@@ -137,13 +137,9 @@ const Home = () => {
             <View 
               style={tw`px-4 mt-4`}
             >
-              <Text style={{
-                color: COLORS.white,
-                fontSize: SIZES.medium,
-                fontFamily: FONTS.bold,
-                textTransform: "uppercase",
-                marginBottom: SIZES.base
-              }}>Progress</Text>
+              <Text 
+                style={tw`text-white text-base font-bold uppercase mb-2`}
+              >Progress</Text>
               <LineChart
                 data={dataChartProgress}
                 onDataPointClick={(data) => {

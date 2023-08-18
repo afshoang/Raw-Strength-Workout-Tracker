@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ButtonLink } from './Button';
 import { SIZES, COLORS, FONTS } from '../constants';
 import DayCard from './DayCard';
+import tw from '../lib/tailwind';
 
 const Weeks = ({ workOuts, trainningMax }) => {
   const navigation = useNavigation()
@@ -13,21 +14,15 @@ const Weeks = ({ workOuts, trainningMax }) => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{
-          paddingHorizontal: SIZES.font,
+        paddingHorizontal: SIZES.font,
       }}
     >
       {/* DAY CARD */}
-      <View style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}>
-        <Text style={{
-          color: COLORS.white,
-          fontSize: SIZES.medium,
-          fontFamily: FONTS.bold,
-          textTransform: "uppercase",
-          marginBottom: SIZES.base
-        }}
+      <View 
+        style={tw`flex flex-row justify-between`}
+      >
+        <Text 
+          style={tw`text-white text-base font-bold uppercase mb-2`}
         >{`WEEK ${workOuts[0]?.week + 1}`}</Text>
         <ButtonLink textBtn={'Edit cycle'} handlePress={() => navigation.navigate("Cycle", { id: "edit" })} />
       </View>

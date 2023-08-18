@@ -4,7 +4,8 @@ import { View, Text, Pressable } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-import { COLORS, FONTS, SIZES, NameExercise } from '../constants';
+import { COLORS, NameExercise } from '../constants';
+import tw from '../lib/tailwind';
 
 const DayCard = ({ day, trainningMax }) => {
   const navigation = useNavigation()
@@ -19,30 +20,19 @@ const DayCard = ({ day, trainningMax }) => {
   const weight = roundInt(trainningMax * weightPercen[day.week], 2.5)
 
   return (
-      <View style={{
-          width: "100%",
-          backgroundColor: COLORS.primary,
-          borderRadius: SIZES.font,
-          paddingHorizontal: SIZES.large,
-          paddingVertical: SIZES.base,
-          marginBottom: SIZES.base
-      }}>
+      <View 
+        style={tw`w-full bg-primary rounded-lg px-5 py-2 mb-2`}
+      >
         <Pressable
           onPress={() => navigation.navigate("WorkDay", { id: day.id })}
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
+          style={tw`flex flex-row justify-between`}
         >
-          <View style={{
-            flexDirection: "row",
-          }}>
-            <View style={{
-              display: "flex",
-              justifyContent: "center",
-              marginLeft: SIZES.base
-            }}>
+          <View 
+            style={tw`flex flex-row`}
+          >
+            <View 
+              style={tw`flex justify-center ml-2`}
+            >
               {
                 day.timeWorkOut !== null
                 ?
@@ -51,33 +41,27 @@ const DayCard = ({ day, trainningMax }) => {
                 <Ionicons name="ios-barbell" size={24} color={COLORS.white} />
               }
             </View>
-            <View style={{
-              marginLeft: SIZES.extraLarge
-            }}>
+            <View 
+              style={tw`ml-6`}
+            >
               <Text
-                style={{
-                  color: COLORS.white,
-                  fontSize: SIZES.font,
-                  fontFamily: FONTS.bold,
-                  paddingBottom: SIZES.base
-                }}
+                style={tw`font-bold text-white text-sm pb-2`}
               >{Object.values(NameExercise)[day.type]}</Text>
-              <Text style={{
-                color: COLORS.gray,
-            }}>{day.week < 3 && `PR:` } 
-              <Text style={{
-                color: COLORS.white,
-              }}>
+              <Text
+                style={tw`text-gray`}
+            >{day.week < 3 && `PR:` } 
+              <Text
+                style={tw`text-white`} 
+              >
                 {day.week < 3 ? `${day.week === 0 ? `5+` : day.week === 1 ? `3+` : `1+`} x ${weight}` : `Deload`}
               </Text> 
               </Text>
             </View>
           </View>
 
-          <View style={{
-            display: "flex",
-            justifyContent: "center"
-          }}>
+          <View 
+            style={tw`flex justify-center`}
+          >
             <MaterialIcons name="keyboard-arrow-right" size={24} color={COLORS.white} />
           </View>
         </Pressable>
