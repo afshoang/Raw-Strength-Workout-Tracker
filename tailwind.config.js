@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
     // content: ['./src/**/*.{html,js}'],
     theme: {
@@ -36,4 +38,12 @@ module.exports = {
             }
         }
     },
+    plugins: [
+        plugin(({ addUtilities }) => {
+            addUtilities({
+                '.card': `bg-primary p-4 rounded-lg mb-4`,
+                '.text-card': `text-white font-bold text-lg uppercase`
+            });
+        }),
+    ],
 }

@@ -172,7 +172,7 @@ const Cycle = () => {
           >
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={tw`px-4 h-full`}
+                style={tw`px-3.5 h-full`}
             >
             {/* SET UP TRAINNING MAX */}
             <View 
@@ -214,7 +214,7 @@ const Cycle = () => {
                         oneRepMax.map(({typeDay, reps, weight, trainingMax}) =>
                             <View
                                 key={typeDay}
-                                style={tw`flex flex-row items-center justify-between bg-primary mb-4`}
+                                style={tw`flex flex-row items-center justify-between bg-primary mb-5`}
                             >
                                 <Text
                                     style={tw`text-white text-sm`}
@@ -282,10 +282,10 @@ const Cycle = () => {
 
             {/* TEMPLATE */}
             <View
-                style={tw`bg-primary p-4 rounded-lg mb-4`}
+                style={tw`card`}
             >
                 <Text
-                    style={tw`text-white font-bold text-lg`}
+                    style={tw`text-card`}
                 >
                     TEMPLATE
                 </Text>
@@ -313,11 +313,11 @@ const Cycle = () => {
             {
                 (selectedTemplate === 'bbb') && (
                     <View 
-                        style={tw`bg-primary p-4 rounded-lg mb-4`}
+                        style={tw`card`}
                     >
                         <>
                             <Text
-                                style={tw`text-white font-bold text-lg`}
+                                style={tw`text-card`}
                             >
                                 BORING BUT BIG
                             </Text>
