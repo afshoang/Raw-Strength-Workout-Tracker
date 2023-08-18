@@ -3,6 +3,7 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { View, Text, Pressable, ScrollView, TextInput, KeyboardAvoidingView } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import SegmentedControlTab from "react-native-segmented-control-tab";
+import tw from '../lib/tailwind';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -166,25 +167,20 @@ const Cycle = () => {
 
   return (
     <>
-          <KeyboardAvoidingView style={{ flex: 1 }}>
+          <KeyboardAvoidingView 
+            style={tw`flex-1`}
+          >
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={{
-                    paddingHorizontal: SIZES.font,
-                    height: '100%'
-                }}
+                style={tw`px-4 h-full`}
             >
             {/* SET UP TRAINNING MAX */}
-            <View style={{
-                backgroundColor: COLORS.primary,
-                padding: SIZES.font,
-                borderRadius: SIZES.font,
-                marginTop: SIZES.large,
-                marginBottom: SIZES.large
-            }}>
-                <View style={{
-                    marginBottom: SIZES.font
-                }}>
+            <View 
+                style={tw`bg-primary p-4 rounded-lg my-5`}
+            >
+                <View
+                    style={tw`mb-4`}
+                >
                     <SegmentedControlTab
                         tabsContainerStyle={{
                             backgroundColor: COLORS.secondary,
@@ -218,29 +214,17 @@ const Cycle = () => {
                         oneRepMax.map(({typeDay, reps, weight, trainingMax}) =>
                             <View
                                 key={typeDay}
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    backgroundColor: COLORS.primary,
-                                    marginBottom: 15
-                                }}
+                                style={tw`flex flex-row items-center justify-between bg-primary mb-4`}
                             >
                                 <Text
-                                    style={{
-                                        color: COLORS.white,
-                                        fontSize: SIZES.medium
-                                    }}>
+                                    style={tw`text-white text-sm`}
+                                >
                                     {NameExercise[typeDay]}
                                 </Text>
 
-                                <View style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    gap: 10
-                                }}>
+                                <View 
+                                    style={tw`flex flex-row items-center gap-2.5`}
+                                >
                                     {
                                         selectedTabIndex === 0
                                         &&
@@ -249,19 +233,11 @@ const Cycle = () => {
                                                     value={reps}
                                                     onChangeText={(value) => handleChangeORM("reps", typeDay, value)}
                                                     keyboardType="numeric"
-                                                    style={{
-                                                        height: 35,
-                                                        width: 35,
-                                                        borderRadius: 10,
-                                                        backgroundColor: COLORS.white,
-                                                        textAlign: "center",
-                                                        fontSize: SIZES.font
-                                                    }}
+                                                    style={tw`h-[35px] w-[35px] bg-white text-center text-sm rounded-lg`}
                                                 />
                                                 <Text
-                                                    style={{
-                                                        color: COLORS.white
-                                                    }}>
+                                                    style={tw`text-white`}
+                                                >
                                                     rep x
                                                 </Text>
                                             </>
@@ -270,19 +246,11 @@ const Cycle = () => {
                                         value={selectedTabIndex === 0 ? weight : trainingMax.toString()}
                                         onChangeText={(value) => handleChangeORM("weight", typeDay, value)}
                                         keyboardType="numeric"
-                                        style={{
-                                            height: 35,
-                                            width: 60,
-                                            borderRadius: 10,
-                                            backgroundColor: COLORS.white,
-                                            textAlign: "center",
-                                            fontSize: SIZES.font
-                                        }}
+                                        style={tw`h-[35px] w-[60px] bg-white text-center text-sm rounded-lg`}
                                     />
                                     <Text
-                                        style={{
-                                            color: COLORS.white
-                                        }}>
+                                        style={tw`text-white`}
+                                    >
                                         {weightUnit}
                                     </Text>
                                 </View>
@@ -293,167 +261,99 @@ const Cycle = () => {
                 {
                     selectedTabIndex === 0
                     &&
-                    <View style={{
-                        borderTopColor: COLORS.gray,
-                        borderTopWidth: 0.5,
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        paddingTop: SIZES.font,
-                    }}>
-                        <Text style={{
-                            color: COLORS.white
-                        }}>Training Max Ratio </Text>
-                        <View style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            gap: 10
-                        }}>
+                    <View 
+                        style={tw`flex flex-row items-center justify-between border-t-[0.5px] border-gray pt-4`}
+                    >
+                        <Text style={tw`text-white`}>Training Max Ratio </Text>
+                        <View
+                            style={tw`flex flex-row items-center gap-2.5`}
+                        >
                             <TextInput
                                 value={tmRatio}
                                 onChangeText={(value) => setTMRatio(value)}
                                 keyboardType="numeric"
-                                style={{
-                                    height: 35,
-                                    width: 60,
-                                    borderRadius: 10,
-                                    backgroundColor: COLORS.white,
-                                    textAlign: "center",
-                                    fontSize: SIZES.font
-                                }}
+                                style={tw`h-[35px] w-[60px] bg-white text-center text-sm rounded-lg`}
                             />
-                            <Text style={{
-                                color: COLORS.white
-                            }}>%</Text>
+                            <Text style={tw`text-white`}>%</Text>
                         </View>
                     </View>
                 }
             </View>
 
             {/* TEMPLATE */}
-            <View style={{
-                backgroundColor: COLORS.primary,
-                padding: SIZES.font,
-                borderRadius: SIZES.font,
-                marginBottom: SIZES.large
-            }}>
+            <View
+                style={tw`bg-primary p-4 rounded-lg mb-4`}
+            >
                 <Text
-                    style={{
-                        color: COLORS.white,
-                        fontFamily: FONTS.bold,
-                        fontSize: SIZES.large
-                    }}
+                    style={tw`text-white font-bold text-lg`}
                 >
                     TEMPLATE
                 </Text>
 
-                <View style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 10
-                }}>
-                    <Text style={{
-                        color: COLORS.white,
-                    }}>Template</Text>
+                <View
+                    style={tw`flex flex-row items-center justify-between my-1.5`}
+                >
+                    <Text 
+                        style={tw`text-white`}
+                    >Template</Text>
                     <Pressable
                         onPress={() => handleOpenModal(0)}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center'
-                        }}
+                        style={tw`flex flex-row items-center`}
                     >
-                        <Text style={{
-                            color: COLORS.white,
-                        }}>{SupplementTemplate.find(temp => temp.value === selectedTemplate)?.name}</Text>
+                        <Text style={tw`text-white`}>
+                            {SupplementTemplate.find(temp => temp.value === selectedTemplate)?.name}
+                        </Text>
                         
                         <MaterialIcons name="keyboard-arrow-right" size={20} color={COLORS.white} />
                     </Pressable>
                 </View>
-
-                
             </View>
 
             {/* VARIANT OF TEMPLATE */}
             {
                 (selectedTemplate === 'bbb') && (
-                    <View style={{
-                        backgroundColor: COLORS.primary,
-                        padding: SIZES.font,
-                        borderRadius: SIZES.font,
-                        marginBottom: SIZES.large
-                    }}>
+                    <View 
+                        style={tw`bg-primary p-4 rounded-lg mb-4`}
+                    >
                         <>
                             <Text
-                                style={{
-                                    color: COLORS.white,
-                                    fontFamily: FONTS.bold,
-                                    fontSize: SIZES.large
-                                }}
+                                style={tw`text-white font-bold text-lg`}
                             >
                                 BORING BUT BIG
                             </Text>
-                            <View style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                marginTop: 10
-                            }}>
-                                <Text style={{
-                                    color: COLORS.white,
-                                }}>Variant</Text>
+                            <View
+                                style={tw`flex flex-row items-center justify-between my-1.5`}
+                            >
+                                <Text style={tw`text-white`}>Variant</Text>
                                 <Pressable
                                     onPress={() => handleOpenModal(1)}
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        alignItems: 'center'
-                                    }}
+                                    style={tw`flex flex-row items-center`}
                                 >
-                                    <Text style={{
-                                        color: COLORS.white,
-                                    }}>{SupplementTemplate.find(temp => temp.value === selectedTemplate)?.variant.find(vari => vari.value === selectedVariant)?.name}</Text>
+                                    <Text style={tw`text-white`}>
+                                        {SupplementTemplate.find(temp => temp.value === selectedTemplate)?.variant.find(vari => vari.value === selectedVariant)?.name}
+                                    </Text>
 
                                     <MaterialIcons name="keyboard-arrow-right" size={20} color={COLORS.white} />
                                 </Pressable>
                             </View>
-                            <View style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                marginTop: 20
-                            }}>
-                                <Text style={{
-                                    color: COLORS.white,
-                                }}>{selectedVariant === 'original' ? '5 x 10' : '3 x 10'}</Text>
-                                <View style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    gap: 10
-                                }}>
+                            <View 
+                                style={tw`flex flex-row items-center justify-between mt-5`}
+                            >
+                                <Text style={tw`text-white`}>
+                                    {selectedVariant === 'original' ? '5 x 10' : '3 x 10'}
+                                </Text>
+                                <View 
+                                    style={tw`flex flex-row items-center gap-2.5`}
+                                >
                                     <TextInput
                                         value={tmRatioSupplemental}
                                         onChangeText={(value) => setTMRatioSupplemental(value)}
                                         keyboardType="numeric"
-                                        style={{
-                                            height: 35,
-                                            width: 60,
-                                            borderRadius: 10,
-                                            backgroundColor: COLORS.white,
-                                            textAlign: "center",
-                                            fontSize: SIZES.font
-                                        }}
+                                        style={tw`h-[35px] w-[60px] bg-white text-center text-sm rounded-lg`}
                                     />
-                                    <Text style={{
-                                        color: COLORS.white
-                                    }}>%</Text>
+                                    <Text style={tw`text-white`}>
+                                        %
+                                    </Text>
                                 </View>
                             </View>
                         </>
@@ -478,7 +378,7 @@ const Cycle = () => {
                     Assistance
                 </Text>
             </View> */}
-        {dataCycle && <View style={{ alignItems: 'center', marginTop: SIZES.base }}><ButtonLink textBtn="Delete Cycle" color="red" handlePress={handleDeleteCycle} /></View> }
+        {dataCycle && <View style={tw`flex items-center mt-2`}><ButtonLink textBtn="Delete Cycle" color="red" handlePress={handleDeleteCycle} /></View> }
             </ScrollView>
         </KeyboardAvoidingView>
         <ModalPicker data={typeDisplayPicker === 0 ? SupplementTemplate : dataVariant} isVisibleModal={displayPicker} setIsVisibleModal={setDisplayPicker} selectedValue={typeDisplayPicker === 0 ? selectedTemplate : selectedVariant} handleChange={typeDisplayPicker === 0 ? handleChangeTemplate : setSelectedVariant} />

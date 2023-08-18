@@ -4,6 +4,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux'
 import { SafeAreaView, Text, View, Pressable, ScrollView, Dimensions } from 'react-native'
 import SegmentedControlTab from "react-native-segmented-control-tab";
+import tw from '../lib/tailwind';
 import {
   LineChart
 } from "react-native-chart-kit";
@@ -12,7 +13,6 @@ import { selectAllCycle, selectCycle } from '../slices/cycleSlice'
 import { selectAllWorkOut, selectWorkOutByCycleId } from '../slices/workOutSlice';
 import { COLORS, SIZES, FONTS } from "../constants";
 import { Weeks, UpcomingCycle } from '../components';
-import tw from '../lib/tailwind';
 
 const Home = () => {
   const navigation = useNavigation()
