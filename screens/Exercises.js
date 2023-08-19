@@ -3,7 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { Pressable, SafeAreaView, View, Text, TextInput, ScrollView } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
-
+import tw from '../lib/tailwind';
 
 import { ExercisesData, ExerciseCategories, COLORS, FONTS, SIZES } from '../constants';
 import { BackButton, ModalPicker } from '../components';
@@ -53,78 +53,60 @@ const Exercises = () => {
 
   return (
     <>
-    <SafeAreaView style={{ marginTop: 30, marginBottom: 150 }}>
-        <View style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 10
-        }}>
+    <SafeAreaView 
+        style={tw`mt-7 mb-40`}
+    >
+        <View 
+            style={tw`flex flex-row items-center gap-3.5`}
+        >
             <TextInput
                 value={searchExercise}
                 onChangeText={(value) => setSearchExercise(value)}
                 placeholder='Search'
-                placeholderTextColor={COLORS.gray} 
-                style={{
-                    position: 'relative',
-                    height: 50,
-                    width: '100%',
-                    borderRadius: 10,
-                    backgroundColor: COLORS.primary,
-                    fontSize: SIZES.medium,
-                    paddingLeft: 50,
-                    color: COLORS.white
-                }}
+                placeholderTextColor={COLORS.gray}
+                style={tw`relative w-full h-[50px] bg-primary text-base pl-12 rounded-lg text-white`}
             />
 
-            <View style={{
-                position: 'absolute',
-                justifyContent: 'center',
-                left: SIZES.small
-            }}>
+            <View 
+                style={tw`absolute flex justify-center left-2`}
+            >
                 <MaterialIcons name="search" size={24} color={COLORS.gray} />
             </View>
         </View>
 
-        <View style={{ marginTop: SIZES.large, width: '30%' }}>
+        <View 
+            style={tw`w-2/6 mt-5`}
+        >
             <Pressable
                 onPress={() => setDisplayPicker(true)}
-                style={{
-                    backgroundColor: selectedCategory !== -1 ? COLORS.main : COLORS.primary,
-                    borderRadius: SIZES.small,
-                    padding: SIZES.base
-                }}
+                style={tw`${selectedCategory !== -1 ? `bg-main` : `bg-primary`} rounded-lg p-2`}
             >
-                <Text style={{ color: selectedCategory !== -1 ? COLORS.primary : COLORS.white, fontSize: SIZES.medium, textAlign: 'center' }}>{categories.find(cate => cate.value === selectedCategory)?.name}</Text>
+                <Text
+                    style={tw`${selectedCategory !== -1 ? `text-primary` : `text-white`} text-base text-center`}
+                >
+                    {categories.find(cate => cate.value === selectedCategory)?.name}
+                </Text>
             </Pressable>
         </View>
         
-        <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30, height: '100%' }}>
+        <ScrollView 
+            showsVerticalScrollIndicator={false}
+            style={tw`mt-7 h-full`}
+        >
             {
                 handleFilterExercises(exercises).map((ex) => (
                 <View
                     key={ex.name}
-                    style={{
-                        width: "100%",
-                        backgroundColor: COLORS.primary,
-                        borderRadius: SIZES.small,
-                        paddingHorizontal: SIZES.large,
-                        paddingVertical: SIZES.large,
-                        marginBottom: SIZES.font
-                    }}
+                    style={tw`w-full bg-primary rounded-lg p-5 mb-4`}
                 >
                     <Pressable
                         onPress={() => {
                             dispatch(addExercise({ id, idExercise: ex.id }))
                             navigation.goBack()
                         }}
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                        }}
+                        style={tw`flex flex-row justify-between`}
                     >
-                        <Text style={{ color: COLORS.white }}>{ex.name.split('').map((char, idx) => idx === 0 ? char.toUpperCase() : char).join('')}</Text>
+                        <Text style={tw`text-white`}>{ex.name.split('').map((char, idx) => idx === 0 ? char.toUpperCase() : char).join('')}</Text>
                     </Pressable>
                 </View>
             ))
