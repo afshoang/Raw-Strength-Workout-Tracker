@@ -6,7 +6,6 @@ import ModalPicker from './ModalPicker';
 import UpcomingCycle from './UpcomingCycle';
 import TimePicker from './TimePicker';
 import Weeks from "./Weeks";
-import TrainningMaxDay from "./TrainningMaxDay";
 import SetRow from './SetRow';
 
 export {
@@ -18,7 +17,6 @@ export {
     ModalPicker,
     UpcomingCycle,
     Weeks,
-    TrainningMaxDay,
     TimePicker,
     SetRow,
 }

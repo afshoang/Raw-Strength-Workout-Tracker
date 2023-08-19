@@ -74,7 +74,6 @@ const CustomAlert = (props) => {
                                             style={{
                                                 color: (item.styles && item.styles.color) || iOSDefaults.button.color,
                                                 fontSize: (item.styles && item.styles.fontSize) || iOSDefaults.button.fontSize,
-                                                // fontWeight: (item.styles && item.styles.fontWeight) || singleButtonWeight,
                                                 textTransform: (item.styles && item.styles.textTransform) || iOSDefaults.button.textTransform,
                                                 textAlign: 'center'
                                             }}

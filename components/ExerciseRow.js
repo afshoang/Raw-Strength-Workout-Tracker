@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Pressable, View, Text } from 'react-native'
 import { useDispatch } from 'react-redux'
+import tw from '../lib/tailwind';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -21,57 +22,44 @@ const ExerciseRow = ({ idDay, exercise, type, handleChangeSetDone }) => {
     }
 
   return (
-      <View style={{
-          width: "100%",
-          backgroundColor: COLORS.primary,
-          borderRadius: SIZES.font,
-          paddingHorizontal: SIZES.small,
-          paddingVertical: SIZES.base,
-          marginBottom: SIZES.base
-      }}>
+      <View
+        style={tw`w-full bg-primary p-2.5 rounded-lg mb-3`}
+      >
           <Pressable
               onPress={() => setIsPressed(!isPressed)}
-              style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-              }}
+              style={tw`felx flex-row justify-between`}
           >
-              <View style={{
-                  display: "flex",
-                  flexDirection: "row",
-              }}>
-                  <View style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginLeft: SIZES.base
-                  }}>
-                      <Text style={{ color: COLORS.white, fontSize: SIZES.large }}>{Number(type) + 1}</Text>
-                  </View>
-                  <View style={{
-                      marginLeft: SIZES.extraLarge
-                  }}>
+              <View 
+                style={tw`flex flex-row`}
+              >
+                  <View
+                      style={tw`flex justify-center ml-2`}
+                  >
                       <Text
-                          style={{
-                              color: COLORS.white,
-                              fontSize: SIZES.font,
-                              fontFamily: FONTS.bold,
-                              paddingBottom: SIZES.base
-                          }}
-                      >{exerciseName?.split('').map((char, idx) => idx === 0 ? char.toUpperCase() : char).join('') }</Text>
-                      <Text style={{
-                          color: COLORS.gray,
-                      }}>{typeEx[type]}<Text style={{
-                          color: COLORS.white,
-                      }}></Text>
+                          style={tw`text-white text-base`}
+                      >
+                        {Number(type) + 1}
+                        </Text>
+                  </View>
+                  <View
+                      style={tw`ml-6`}
+                  >
+                      <Text
+                          style={tw`text-white text-sm font-bold pb-2`}
+                      >
+                        {exerciseName?.split('').map((char, idx) => idx === 0 ? char.toUpperCase() : char).join('') }
+                      </Text>
+                      <Text 
+                          style={tw`text-gray`}
+                      >
+                        {typeEx[type]}
                       </Text>
                   </View>
               </View>
 
-              <View style={{
-                  display: "flex",
-                  justifyContent: "center"
-              }}>
+              <View 
+                style={tw`flex justify-center`}
+              >
                     {
                         isPressed
                         ? 
@@ -86,26 +74,20 @@ const ExerciseRow = ({ idDay, exercise, type, handleChangeSetDone }) => {
               isPressed && (
                   <>
                       <View
-                          style={{
-                              borderBottomColor: COLORS.gray,
-                              borderBottomWidth: 0.5,
-                              marginVertical: SIZES.base,
-                          }}
+                          style={tw`border-b-[0.5px] border-gray my-3`}
                       />
                       {/* SET ROW HERE */}
-                      <View style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                      }}>
-                          <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'center' }}>
-                              <Text style={{ color: COLORS.white }}>Reps</Text>
+                      <View 
+                        style={tw`flex flex-row justify-center`}
+                      >
+                          <View style={tw`flex flex-row flex-4 justify-center`}>
+                              <Text style={tw`text-white`}>Reps</Text>
                           </View>
-                          <View style={{ flex: 4, flexDirection: 'row', justifyContent: 'center' }}>
-                              <Text style={{ color: COLORS.white }}>kg</Text>
+                          <View style={tw`flex flex-row flex-4 justify-center`}>
+                              <Text style={tw`text-white`}>kg</Text>
                           </View>
-                          <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center' }}>
-                              <Text style={{ color: COLORS.white }}>Done</Text>
+                          <View style={tw`flex flex-row flex-2 justify-center`}>
+                              <Text style={tw`text-white`}>Done</Text>
                           </View>
                       </View>
                       {
@@ -115,20 +97,14 @@ const ExerciseRow = ({ idDay, exercise, type, handleChangeSetDone }) => {
                       }
                       {/* ADD NEW SET FOR THIS EXERCISE */}
                       <Pressable
-                        style={{
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            padding: SIZES.font,
-                            marginTop: SIZES.font,
-                            borderRadius: SIZES.font,
-                            backgroundColor: COLORS.secondary,
-                        }}
+                        style={tw`flex flex-row justify-center p-4 mt-4 rounded-lg bg-secondary`}
                           onPress={() => dispatch(addSet({ id: idDay, exerciseRowId: exercise.id, typeSet: type }))}
                         >
-                          <Text style={{
-                            color: COLORS.white,
-                            fontSize: SIZES.medium
-                          }}>Add Set</Text>
+                          <Text
+                            style={tw`text-white text-base`}
+                          >
+                            Add Set
+                        </Text>
                       </Pressable>
                   </>
               )

@@ -2,10 +2,11 @@ import { useRef, useState } from 'react';
 import { Pressable, View, Text, TextInput } from 'react-native'
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { useDispatch } from 'react-redux'
+import tw from '../lib/tailwind';
 
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
-import { COLORS, SIZES } from '../constants';
+import { COLORS } from '../constants';
 import { updateSet, deleteSet } from '../slices/workOutSlice'
 
 const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone }) => {
@@ -26,34 +27,24 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
   return (
     <SwipeRow
       ref={swipeRowRef}
-      leftOpenValue={100}
+      leftOpenValue={130}
       rightOpenValue={-100}
       onRowOpen={() => setIsRowOpened(true)}
       onRowClose={() => setIsRowOpened(false)}
     >
-      <View style={{
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'space-between',
-        padding: 15,
-      }}>
-        <View style={{
-          opacity: isRowOpened ? 1 : 0,
-          justifyContent: 'center'
-        }}>
-          <Text style={{
-            color: COLORS.white,
-            textAlign: 'left',
-            fontSize: SIZES.medium
-          }}>Plate caculator</Text>
+      <View 
+        style={tw`flex flex-row justify-between p-3`}
+      >
+        <View 
+          style={tw`${isRowOpened ? `opacity-100` : `opacity-0`} flex justify-center`}
+        >
+          <Text 
+            style={tw`text-white text-left text-base`}
+          >Plate caculator</Text>
         </View>
-        <View style={{
-          width: 70,
-          height: 45,
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: isRowOpened ? 1 : 0
-        }}>
+        <View 
+          style={tw`${isRowOpened ? `opacity-100` : `opacity-0`} flex justify-center items-center w-[70px] h-[45px]`}
+        >
           <Pressable
             onPress={() => dispatch(deleteSet({ id: idDay, exerciseRowId, indexSet: index }))}
           >
@@ -63,13 +54,9 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
       </View>
       
       <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 5
-        }}
+        style={tw`flex flex-row gap-2`}
       >
-        <View style={{ flex: 4 }}>
+        <View style={tw`flex-4`}>
           <Pressable
             onPress={() => {
               if (isRowOpened) {
@@ -78,19 +65,10 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
               }
               inputRepRef.current.focus()
             }}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              padding: SIZES.font,
-              marginTop: SIZES.font,
-              borderRadius: SIZES.font,
-              backgroundColor: COLORS.secondary,
-              borderColor: isInputRepFocused ? COLORS.main : COLORS.secondary,
-              borderWidth: 0.5
-            }}
+            style={tw`flex flex-row justify-center p-3 mt-3.5 rounded-lg bg-secondary ${isInputRepFocused ? `border-main` : `border-secondary`} border-[0.5px]`}
           >
             <TextInput
-              style={{ height: 0, width: 0, borderWidth: 0 }}
+              style={tw`h-0 w-0 border-0`}
               ref={inputRepRef}
               onChangeText={(value) => dispatch(updateSet({ id: idDay, exerciseRowId, indexSet: index, keyDataChange: 'reps', valueDataChange: Number(value) }))}
               value={set.reps.toString()}
@@ -98,10 +76,16 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
               onFocus={() => setIsInputRepFocused(true)}
               onBlur={() => setIsInputRepFocused(false)}
             />
-            <Text style={{ color: isInputRepFocused ? COLORS.gray : COLORS.white, fontSize: SIZES.large }}>{set.reps}{(type === 1 && index === 2) ? '+' : ''}</Text>
+            <Text
+              style={tw`${isInputRepFocused ? `text-gray` : `text-white`} text-lg`}
+            >
+              {set.reps}{(type === 1 && index === 2) ? '+' : ''}
+            </Text>
           </Pressable>
         </View>
-        <View style={{ flex: 4 }}>
+        <View 
+          style={tw`flex-4`}
+        >
           <Pressable
             onPress={() => {
               if (isRowOpened) {
@@ -110,19 +94,10 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
               }
               inputWeightRef.current.focus()
             }}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              padding: SIZES.font,
-              marginTop: SIZES.font,
-              borderRadius: SIZES.font,
-              backgroundColor: COLORS.secondary,
-              borderColor: isInputWeightFocused ? COLORS.main : COLORS.secondary,
-              borderWidth: 0.5
-            }}
+            style={tw`flex flex-row justify-center p-3 mt-3.5 rounded-lg bg-secondary ${isInputWeightFocused ? `border-main` : `border-secondary`} border-[0.5px]`}
           >
             <TextInput
-              style={{ height: 0, width: 0, borderWidth: 0 }}
+              style={tw`h-0 w-0 border-0`}
               ref={inputWeightRef}
               onChangeText={(value) => dispatch(updateSet({ id: idDay, exerciseRowId, indexSet: index, keyDataChange: 'weightRound', valueDataChange: Number(value) }))}
               value={set.weightRound.toString()}
@@ -130,10 +105,14 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
               onFocus={() => setIsInputWeightFocused(true)}
               onBlur={() => setIsInputWeightFocused(false)}
             />
-            <Text style={{ color: isInputWeightFocused ? COLORS.gray : COLORS.white, fontSize: SIZES.large }}>{set.weightRound}</Text>
+            <Text
+              style={tw`${isInputWeightFocused ? `text-gray` : `text-white`} text-lg`}
+            >
+              {set.weightRound}
+            </Text>
           </Pressable>
         </View>
-        <View style={{ flex: 2 }}>
+        <View style={tw`flex-2`}>
           <Pressable 
             onPress={() => {
               if (isRowOpened) {
@@ -142,16 +121,9 @@ const SetRow = ({ idDay, exerciseRowId, type, set, index, handleChangeSetDone })
               }
               handleChangeSetDone(exerciseRowId, type, index, { done: !set.done })
             }}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              padding: SIZES.font,
-              marginTop: SIZES.font,
-              borderRadius: SIZES.font,
-              backgroundColor: Boolean(set.done) ? COLORS.main : COLORS.secondary,
-            }}
+            style={tw`flex flex-row justify-center p-3 mt-3.5 rounded-lg bg-secondary ${Boolean(set.done) ? `bg-main` : `bg-secondary`}`}
           >
-            <MaterialIcons name="done" size={22} color={Boolean(set.done) ? COLORS.primary : COLORS.white} />
+            <MaterialIcons name="done" size={28} color={Boolean(set.done) ? COLORS.primary : COLORS.white} />
           </Pressable>
         </View>
       </View>

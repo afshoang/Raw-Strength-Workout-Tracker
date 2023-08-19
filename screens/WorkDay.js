@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Pressable, SafeAreaView, ScrollView, View, Text } from 'react-native'
+import tw from '../lib/tailwind';
 
 import { selectWorkDayById, saveWorkOut } from '../slices/workOutSlice'
 import { selectSetting } from '../slices/settingSlice';
-import { COLORS, FONTS, SIZES } from '../constants';
+import { COLORS } from '../constants';
 import { BackButton, ButtonLink, ExerciseRow, CustomAlert } from '../components';
 
 const WorkDay = () => {
@@ -110,16 +111,16 @@ const WorkDay = () => {
 
   return (
     <>
-    <SafeAreaView style={{marginBottom: 50}}>
+    <SafeAreaView
+      style={tw`mb-14`}
+    >
       <View>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'center'
-        }}>
-          <Text style={{
-            color: COLORS.white,
-            fontSize: SIZES.extraLarge
-          }}>
+        <View
+          style={tw`flex flex-row justify-center`}
+        >
+          <Text
+            style={tw`text-white text-2xl`}
+          >
             {
               restTime
               ? 
@@ -134,10 +135,8 @@ const WorkDay = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{
-          marginTop: SIZES.large,
-          height: '100%'
-        }}>
+        style={tw`mt-5 h-full`}
+      >
           {
             typeExcercises?.map((exercise, idx) => (
               <ExerciseRow key={idx} idDay={workDay?.id} exercise={exercise} type={exercise.type} week={workDay?.week} typeDay={workDay?.type} handleChangeSetDone={handleChangeSetDone} />
@@ -146,20 +145,11 @@ const WorkDay = () => {
         
         <Pressable 
           onPress={() => navigation.navigate('Exercises', { id: workDay?.id })}
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            padding: SIZES.font,
-            marginTop: SIZES.font,
-            borderRadius: SIZES.font,
-            backgroundColor: COLORS.main,
-          }}
+          style={tw`flex flex-row justify-center p-4 bg-main rounded-lg mt-4`}
         >
-          <Text style={{
-            color: COLORS.primary,
-            fontSize: SIZES.font,
-            fontFamily: FONTS.bold
-          }}>+ Add Exercise</Text>
+          <Text 
+              style={tw`text-primary text-sm font-bold`}
+          >+ Add Exercise</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>

@@ -1,30 +1,18 @@
 import { COLORS } from '../constants';
 import { Picker } from '@react-native-picker/picker';
 import Modal from 'react-native-modal'
+import tw from '../lib/tailwind';
 
 const ModalPicker = ({ data, isVisibleModal, setIsVisibleModal, selectedValue, handleChange }) => {
 
   return (
     <Modal
-        style={{
-            margin: 0,
-            backgroundColor: COLORS.white,
-            height: 100,
-            flex: 0,
-            bottom: 0,
-            position: 'absolute',
-            width: '100%'
-        }}
+        style={tw`w-full m-0 flex-0 bottom-0 h-24 absolute bg-white`}
         isVisible={isVisibleModal}
         onBackdropPress={() => setIsVisibleModal(false)}
     >
         <Picker
-            style={{
-                backgroundColor: COLORS.white,
-                bottom: 0,
-                position: 'absolute',
-                width: '100%'
-            }}
+            style={tw`w-full bottom-0 absolute bg-white`}
             selectedValue={selectedValue}
             onValueChange={(itemValue, itemIndex) => handleChange(itemValue)}
         >
